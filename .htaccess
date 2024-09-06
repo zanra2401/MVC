@@ -1,0 +1,11 @@
+<FilesMatch ".env">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ /MyArticle/index.php?url=$1 [L]

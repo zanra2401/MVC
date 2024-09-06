@@ -1,0 +1,11 @@
+{
+    "name": "zanra/my-article",
+    "autoload": {
+        "psr-4": {
+            "Zanra\\MyArticle\\": "src/"
+        }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
