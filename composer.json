@@ -1,8 +1,8 @@
 {
-    "name": "zanra/my-article",
+    "name": "zanra/mvc",
     "autoload": {
         "psr-4": {
-            "Zanra\\MyArticle\\": "src/"
+            "Zanra\\MVC\\": "app/"
         }
     },
     "require": {

@@ -1,6 +1,9 @@
-<FilesMatch ".env">
-    Order Deny,Allow
-    Deny from all
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "composer.*">
+    Require all denied
 </FilesMatch>
 
 

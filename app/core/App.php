@@ -30,21 +30,28 @@ class App {
                 require_once ROOT_APP . "controllers/" . $this->controller . ".php";
                 if (isset($this->controller))
                 {
-                    $controller = new $this->controller;
+                    $this->controller = new $this->controller;
                     if (isset($this->method) && method_exists($controller, $this->method))
                     {
-                        call_user_func_array([$controller, $this->method], [$this->param]);
+                        call_user_func_array([$this->controller, $this->method], [$this->param]);
                     }
                     else 
                     {
-                        $controller->index();
+                        $this->controller->index();
                     }
                 }
             }
             else
             {
+                // JIKA CONTROLLER TIDAK DI TEMUKAN
                 echo "404 NOT FOUND";
             }
+        }
+        else 
+        {
+            require_once ROOT_APP . "controllers/Zanra.php";
+            $this->controller = new Zanra();
+            $this->controller->index();
         }
         
     }

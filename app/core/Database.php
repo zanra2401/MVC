@@ -21,4 +21,21 @@ class Database {
             );
         }
     }
+
+    function get($sql_query, $param = null, $tipe_data = null)
+    {
+        $stmt = $this->connection->preppare($sql_query);
+        if (isset($param))
+        {
+            $stmt->prepare($tipe_data, extract($param));
+        }
+        $stmt->execute();
+        
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+    function set()
+    {
+        return; 
+    }
 }
