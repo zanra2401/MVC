@@ -36,7 +36,7 @@ class App {
 
     private function parseUrl()
     {
-            $this->controller = array_shift($this->url);
+            $this->controller = ucfirst(array_shift($this->url));
             // CEK file controller ada atau tidak
             if (!file_exists(ROOT_APP . "controllers/" . $this->controller . ".php"))
             {
