@@ -2,6 +2,10 @@
 
 require_once ROOT_APP . "core/Helper.php";
 require_once ROOT_APP . "core/Database.php";
+require_once ROOT_APP . "controllers/ErrorController.php";
+
+
+$errorController = new ErrorController();
 
 
 class App {
@@ -40,7 +44,7 @@ class App {
             // CEK file controller ada atau tidak
             if (!file_exists(ROOT_APP . "controllers/" . $this->controller . ".php"))
             {
-                $this->pageNotFound();
+                $errorController->pageNotFound();
                 return;
             }
             require_once ROOT_APP . "controllers/" . $this->controller . ".php";
@@ -58,7 +62,8 @@ class App {
     {
         if (isset($_GET["url"]))
         {
-            $this->url = rtrim($_GET["url"], "/");
+            $this->url = htmlspecialchars($_GET["url"], ENT_QUOTES, "UTF-8");
+            $this->url = rtrim($this->url, "/");
             $this->url = filter_var($this->url, FILTER_SANITIZE_URL);
             $this->url = explode("/", $this->url);
             $this->parseUrl();
@@ -75,10 +80,5 @@ class App {
         require_once ROOT_APP . "controllers/" . $this->defaultController . ".php";
         $this->controller = new $this->defaultController;
         call_user_func([$this->controller, $this->defaultMethod]);
-    }
-    
-    private function pageNotFound()
-    {
-        require_once ROOT_APP . "views/" . "notFound.php";
     }
 }
