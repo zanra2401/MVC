@@ -19,6 +19,7 @@ class Database {
                     "error" => "Koneksi ke database gagal <b> PASTIKAN .env sudah di setting dengan benar </b>",
                 ]
             );
+            die();  
         }
     }
 
