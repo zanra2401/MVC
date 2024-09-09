@@ -1,28 +1,25 @@
 <?php
-
-require_once ROOT_APP . "core/Helper.php";
-require_once ROOT_APP . "core/Database.php";
 require_once ROOT_APP . "controllers/ErrorController.php";
 
 
-$errorController = new ErrorController();
+
 
 
 class App {
     private $defaultController;
     private $defaultMethod;
+    private $errorController;
     private $controller;
-    private $database;
     private $method;
     private $param = [];
     private $url;
 
 
-    function __construct() 
+    function __construct($d_controller, $d_method) 
     {
-        // $this->database = new Database();s
-        $this->defaultMethod = "index";
-        $this->defaultController = "Zanra";
+        $this->errorController = new ErrorController();
+        $this->defaultController = $d_controller;
+        $this->defaultMethod = $d_method;
         $this->getUrl();
     }
 
@@ -44,7 +41,7 @@ class App {
             // CEK file controller ada atau tidak
             if (!file_exists(ROOT_APP . "controllers/" . $this->controller . ".php"))
             {
-                $errorController->pageNotFound();
+                $this->errorController->pageNotFound();
                 return;
             }
             require_once ROOT_APP . "controllers/" . $this->controller . ".php";
